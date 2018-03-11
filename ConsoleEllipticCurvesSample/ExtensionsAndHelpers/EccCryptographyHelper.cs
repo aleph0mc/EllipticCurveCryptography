@@ -224,7 +224,7 @@ namespace EllipticCurves.ExtensionsAndHelpers
         #endregion
 
         /// <summary>
-        /// Encrypt text on curve secP256k1 and return a list of poins on the elliptic curve
+        /// Encrypt text on curve secP256k1 and return a list of points on the elliptic curve
         /// </summary>
         /// <param name="Text"></param>
         /// <param name="PubKey"></param>
@@ -290,7 +290,7 @@ namespace EllipticCurves.ExtensionsAndHelpers
         }
 
         /// <summary>
-        /// Encrypt text on curve secP256k1 and return a list of poins on the elliptic curve in Json format (string)
+        /// Encrypt text on curve secP256k1 and return a list of points on the elliptic curve in Json format (string)
         /// </summary>
         /// <param name="Text"></param>
         /// <param name="PubKey"></param>
