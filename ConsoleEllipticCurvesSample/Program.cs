@@ -14,7 +14,7 @@ namespace ConsoleEllipticCurvesSample
             // only Alice knows
             var aliceSecretKey = BigInteger.Parse("55179115824979878594564946684576670362812219109178118526265814188406326272077");
             // only Bob knows
-            var bobSecretKey = BigInteger.Parse("55179115824979878594564946684576670362812219109178118526265814188406326272077");
+            var bobSecretKey = BigInteger.Parse("28186466892849679686038856807396267537577176687436853369");
             // public keys
             // Alice public key
             var pa = EccCryptographyHelper.SecP256k1KeyPairGenerator(aliceSecretKey);
@@ -25,7 +25,7 @@ namespace ConsoleEllipticCurvesSample
             string message = "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Error, assumenda beatae ipsum similique dignissimos odit officia dolores laudantium quis dicta.";
             Console.WriteLine("Alice writes to Bob: {0}", message);
 
-            // Alice encrypt the message using Bob's public key
+            // Alice encrypts the message using Bob's public key
             var decryptStr = EccCryptographyHelper.EncryptSecP256k1Json(message, pb);
             // Bob decrypts the message using his private key
             var decryptedMsg = EccCryptographyHelper.DecryptSecP256k1Json(decryptStr, bobSecretKey);
@@ -39,7 +39,7 @@ namespace ConsoleEllipticCurvesSample
             message = "Deleniti illum quaerat vel ullam tempore! Animi, deserunt, rerum, illum harum veniam exercitationem cupiditate perspiciatis corporis eveniet quae ipsum sunt nam vel est neque omnis repellat magnam debitis sequi laboriosam blanditiis.";
             Console.WriteLine("Bob writes to Alice: {0}", message);
 
-            // Bob encrypt the message using Alice's public key
+            // Bob encrypts the message using Alice's public key
             decryptStr = EccCryptographyHelper.EncryptSecP256k1Json(message, pa);
             // Alice decrypts the message using his private key
             decryptedMsg = EccCryptographyHelper.DecryptSecP256k1Json(decryptStr, aliceSecretKey);
