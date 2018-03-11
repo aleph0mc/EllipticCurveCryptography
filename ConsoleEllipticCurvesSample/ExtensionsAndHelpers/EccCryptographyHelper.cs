@@ -282,8 +282,8 @@ namespace EllipticCurves.ExtensionsAndHelpers
             foreach (var pnt in lstPm)
             {
                 // a = 0 for secP256k1
-                var add = pointAdd(pnt, kPb, 0, SEC256K1_P);
-                lstEncr.Add(add);
+                var pntAdded = pointAdd(pnt, kPb, 0, SEC256K1_P);
+                lstEncr.Add(pntAdded);
             }
 
             return lstEncr;
@@ -322,7 +322,7 @@ namespace EllipticCurves.ExtensionsAndHelpers
             // remove kG from the list
             LstEncr.RemoveAt(0);
 
-            // 3) decrypt
+            // 3) decrypt - compute Pm - kPb
             var strMsg = string.Empty;
             foreach (var pnt in LstEncr)
             {
@@ -342,6 +342,12 @@ namespace EllipticCurves.ExtensionsAndHelpers
             return strMsg;
         }
 
+        /// <summary>
+        /// Decrypt text on curve secP256k1 using the list of points on the elliptic curve in Json format (string)
+        /// </summary>
+        /// <param name="JsonCrypt"></param>
+        /// <param name="SecretKey"></param>
+        /// <returns></returns>
         public static string DecryptSecP256k1Json(string JsonCrypt, BigInteger SecretKey)
         {
             var deserLst = JsonConvert.DeserializeObject<List<EcModPoint>>(JsonCrypt);

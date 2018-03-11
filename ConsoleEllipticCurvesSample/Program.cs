@@ -16,9 +16,9 @@ namespace ConsoleEllipticCurvesSample
             // only Bob knows
             var bobSecretKey = BigInteger.Parse("28186466892849679686038856807396267537577176687436853369");
             // public keys
-            // Alice public key
+            // Alice's public key
             var pa = EccCryptographyHelper.SecP256k1KeyPairGenerator(aliceSecretKey);
-            // Bob public key
+            // Bob's public key
             var pb = EccCryptographyHelper.SecP256k1KeyPairGenerator(bobSecretKey);
 
             // Alice sends a message to Bob
@@ -41,7 +41,7 @@ namespace ConsoleEllipticCurvesSample
 
             // Bob encrypts the message using Alice's public key
             decryptStr = EccCryptographyHelper.EncryptSecP256k1Json(message, pa);
-            // Alice decrypts the message using his private key
+            // Alice decrypts the message using her private key
             decryptedMsg = EccCryptographyHelper.DecryptSecP256k1Json(decryptStr, aliceSecretKey);
             Console.WriteLine();
             Console.WriteLine();
