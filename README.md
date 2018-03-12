@@ -2,7 +2,7 @@
 
 This is an implementation of text encryption using Elliptic Curve Cryptography.
 
-The encryption and decryption algorithm implemented in this sample c# console application is based on the technique proposed by two researches from the National Institute of Technology in Manipur, India.
+The encryption and decryption algorithm implemented in this sample c# console application is based on the technique proposed by two researchers from the National Institute of Technology in Manipur, India.
 
 The abstract and the full document in pdf format can be found at the following link
 
