@@ -275,7 +275,7 @@ namespace EllipticCurves.ExtensionsAndHelpers
             // 5) compute kPb = k(SkG)
             var kPb = ECKeyPairGenerator(SEC256K1_P, 0, 7, PubKey, SEC256K1_N, k);
 
-            // 6) compute Pm + kPb 
+            // 6) compute Pm + kPb = Pc (encrypted data)
             List<EcModPoint> lstEncr = new List<EcModPoint>();
             // first row is kG
             lstEncr.Add(kG);
@@ -322,21 +322,21 @@ namespace EllipticCurves.ExtensionsAndHelpers
             // remove kG from the list
             LstEncr.RemoveAt(0);
 
-            // 3) decrypt - compute Pm - kPb
+            // 3) decrypt - compute Pc - kPb = Pm (plain message)
             var strMsg = string.Empty;
             foreach (var pnt in LstEncr)
             {
                 var decPnt = pointAdd(pnt, negkPb, 0, SEC256K1_P);
+                // data from x coord
                 var arrUShort = Base65536Helper.ToArray(decPnt.x);
                 var bytes = arrUShort.ToByteArray();
                 var str = Encoding.Unicode.GetString(bytes);
                 strMsg = string.Concat(strMsg, str);
-
+                // data from y coord
                 arrUShort = Base65536Helper.ToArray(decPnt.y);
                 bytes = arrUShort.ToByteArray();
                 str = Encoding.Unicode.GetString(bytes);
                 strMsg = string.Concat(strMsg, str);
-
             }
 
             return strMsg;
