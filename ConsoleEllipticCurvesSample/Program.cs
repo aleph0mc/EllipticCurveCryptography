@@ -11,6 +11,11 @@ namespace ConsoleEllipticCurvesSample
     {
         static void Main(string[] args)
         {
+            // Test conversion
+            BigInteger biTest = BigIntegerExtensions.BinaryStringToDecimal("1010100101011111111111111111111111111111111101010101011011111111111111111111");
+
+            biTest = BigIntegerExtensions.HexadecimalStringToDecimal("0848484AAAAFFFFFFEEEEEE449494949494EEEEEFFFFBBBBDDDDCCCC000000001");
+
             // only Alice knows
             var aliceSecretKey = BigInteger.Parse("55179115824979878594564946684576670362812219109178118526265814188406326272077");
             // only Bob knows

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Numerics;
 using System.Security.Cryptography;
 using System.Text;
@@ -236,6 +237,8 @@ namespace EllipticCurves.ExtensionsAndHelpers
             return 1 == BigInteger.GreatestCommonDivisor(Source, N);
         }
 
+        #region BASE CONVERSION
+
         /// <summary>
         /// Converts a <see cref="BigInteger"/> to a binary string.
         /// </summary>
@@ -341,6 +344,44 @@ namespace EllipticCurves.ExtensionsAndHelpers
 
             return base8.ToString();
         }
+
+        /// <summary>
+        /// Converts a <see cref="BinaryString"/> to a big integer.
+        /// </summary>
+        /// <param name="Source">A <see cref="BigInteger"/>.</param>
+        /// <returns>
+        /// A <see cref="BigInteger"/> from a binary
+        /// representation of the supplied <see cref="System.String"/>.
+        /// </returns>
+        public static BigInteger BinaryStringToDecimal(string BinaryValue)
+        {
+            BigInteger Source = 0;
+
+            foreach (char bit in BinaryValue)
+            {
+                Source <<= 1;
+                Source += bit == '1' ? 1 : 0;
+            }
+
+            return Source;
+        }
+
+        /// <summary>
+        /// Converts a <see cref="HexdecimalString"/> to a big integer.
+        /// </summary>
+        /// <param name="Source">A <see cref="BigInteger"/>.</param>
+        /// <returns>
+        /// A <see cref="BigInteger"/> from a hexadecimal
+        /// representation of the supplied <see cref="System.String"/>.
+        /// </returns>
+        public static BigInteger HexadecimalStringToDecimal(string HexValue)
+        {
+            BigInteger Source = BigInteger.Parse(HexValue, NumberStyles.AllowHexSpecifier);
+
+            return Source;
+        }
+
+        #endregion
 
         #region RANDOM GENERATOR
 
