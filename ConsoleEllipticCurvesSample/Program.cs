@@ -6,7 +6,6 @@ using System.Text;
 
 namespace ConsoleEllipticCurvesSample
 {
-    // Finds the integer square root of a positive number
     class Program
     {
         static void Main(string[] args)
