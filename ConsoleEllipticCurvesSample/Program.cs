@@ -10,11 +10,6 @@ namespace ConsoleEllipticCurvesSample
     {
         static void Main(string[] args)
         {
-            // Test conversion
-            BigInteger biTest = BigIntegerExtensions.BinaryStringToDecimal("1010100101011111111111111111111111111111111101010101011011111111111111111111");
-
-            biTest = BigIntegerExtensions.HexadecimalStringToDecimal("0848484AAAAFFFFFFEEEEEE449494949494EEEEEFFFFBBBBDDDDCCCC000000001");
-
             // only Alice knows
             var aliceSecretKey = BigInteger.Parse("55179115824979878594564946684576670362812219109178118526265814188406326272077");
             // only Bob knows
@@ -30,9 +25,9 @@ namespace ConsoleEllipticCurvesSample
             Console.WriteLine("Alice writes to Bob: {0}", message);
 
             // Alice encrypts the message using Bob's public key
-            var decryptStr = EcCryptographyHelper.EncryptSecP256k1Json(message, pb);
+            var encryptStr = EcCryptographyHelper.EncryptSecP256k1Json(message, pb);
             // Bob decrypts the message using his private key
-            var decryptedMsg = EcCryptographyHelper.DecryptSecP256k1Json(decryptStr, bobSecretKey);
+            var decryptedMsg = EcCryptographyHelper.DecryptSecP256k1Json(encryptStr, bobSecretKey);
             Console.WriteLine();
             Console.WriteLine();
             Console.WriteLine("Bob reads: {0}", decryptedMsg);
@@ -44,9 +39,9 @@ namespace ConsoleEllipticCurvesSample
             Console.WriteLine("Bob writes to Alice: {0}", message);
 
             // Bob encrypts the message using Alice's public key
-            decryptStr = EcCryptographyHelper.EncryptSecP256k1Json(message, pa);
+            encryptStr = EcCryptographyHelper.EncryptSecP256k1Json(message, pa);
             // Alice decrypts the message using her private key
-            decryptedMsg = EcCryptographyHelper.DecryptSecP256k1Json(decryptStr, aliceSecretKey);
+            decryptedMsg = EcCryptographyHelper.DecryptSecP256k1Json(encryptStr, aliceSecretKey);
             Console.WriteLine();
             Console.WriteLine();
             Console.WriteLine("Alice reads: {0}", decryptedMsg);
