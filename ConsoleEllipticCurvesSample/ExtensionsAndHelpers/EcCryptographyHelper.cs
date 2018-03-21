@@ -15,6 +15,9 @@ namespace EllipticCurves.ExtensionsAndHelpers
         public BigInteger OrderN { get; set; }
     }
 
+    /// <summary>
+    /// Helper class for Elliptic Curve Cryptography
+    /// </summary>
     public static class EcCryptographyHelper
     {
         #region CONSTANTS FOR CURVE sec256k1
@@ -246,7 +249,7 @@ namespace EllipticCurves.ExtensionsAndHelpers
                 var encUtf8 = Encoding.Unicode.GetBytes(partitionStr);
                 // convert to ushort array
                 var arrShort = encUtf8.ToUShortArray();
-                // convert to bae 65536 big integer
+                // convert to Base 65536 big integer
                 var bi65536 = Base65536Helper.FromArray(arrShort);
                 // add to the list
                 lstBiMsg.Add(bi65536);
