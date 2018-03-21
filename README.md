@@ -1,4 +1,4 @@
-# EllipticCurveCryptography
+# Elliptic Curve Cryptography (Sample Console Application)
 
 This is an implementation of text encryption using Elliptic Curve Cryptography.
 
