@@ -23,6 +23,8 @@ namespace EllipticCurves.ExtensionsAndHelpers
 
     /// <summary>
     /// Helper class for Elliptic Curve Cryptography
+    /// ref: http://safecurves.cr.yp.to/equation.html
+    /// ref. http://www.secg.org/
     /// </summary>
     public static class EcCryptographyHelper
     {
