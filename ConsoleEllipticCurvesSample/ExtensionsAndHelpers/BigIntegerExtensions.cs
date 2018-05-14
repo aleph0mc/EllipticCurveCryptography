@@ -199,7 +199,7 @@ namespace EllipticCurves.ExtensionsAndHelpers
 
             if (CalcParamsQSZ)
             {
-                CalcParamsQSZ = true;
+                CalcParamsQSZ = false;
                 computeQSZ(P);
             }
 
