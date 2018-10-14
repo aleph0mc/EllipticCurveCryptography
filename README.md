@@ -8,7 +8,7 @@ The abstract and the full document in pdf format can be found at the following l
 
 https://www.sciencedirect.com/science/article/pii/S1877050915013332
 
-The curve I have use in my console application is not the same as the one used by the two authors, but the type known as sec256k1, more information at the following link
+The curve I have used in my console application is not the same as the one used by the two authors, but the type known as sec256k1, more information at the following link
 
 http://www.secg.org/ (visit SEC 2)
 
