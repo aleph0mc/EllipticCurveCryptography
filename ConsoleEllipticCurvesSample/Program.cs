@@ -11,7 +11,7 @@ namespace ConsoleEllipticCurvesSample
         static void Main(string[] args)
         {
             // Elliptic curve chosen
-            var ecType = EllipticCurveType.M383;
+            var ecType = EllipticCurveType.E521;
 
             Console.WriteLine("Elliptic curve type: {0}", ecType.ToString());
             Console.WriteLine();
@@ -34,6 +34,10 @@ namespace ConsoleEllipticCurvesSample
                 case EllipticCurveType.M383:
                     pa = EcCryptographyHelper.M383KeyPairGenerator(aliceSecretKey);
                     pb = EcCryptographyHelper.M383KeyPairGenerator(bobSecretKey);
+                    break;
+                case EllipticCurveType.E521:
+                    pa = EcCryptographyHelper.E521KeyPairGenerator(aliceSecretKey);
+                    pb = EcCryptographyHelper.E521KeyPairGenerator(bobSecretKey);
                     break;
                 default:
                     break;

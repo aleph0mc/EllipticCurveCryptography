@@ -18,7 +18,8 @@ namespace EllipticCurves.ExtensionsAndHelpers
     public enum EllipticCurveType
     {
         SEC256K1,
-        M383
+        M383,
+        E521
     }
 
     /// <summary>
@@ -42,7 +43,7 @@ namespace EllipticCurves.ExtensionsAndHelpers
 
         #endregion
 
-        #region CONSTANTS FOR CURVE M-383 (AKA Curve383187)
+        #region CONSTANTS FOR CURVE M-383 Montgomery (AKA Curve383187)
 
         private static readonly BigInteger M383_P = BigInteger.Parse("19701003098197239606139520050071806902539869635232723333974146702122860885748605305707133127442457820403313995153221");
         private static readonly BigInteger M383_N = BigInteger.Parse("2462625387274654950767440006258975862817483704404090416746934574041288984234680883008327183083615266784870011007447");
@@ -55,6 +56,21 @@ namespace EllipticCurves.ExtensionsAndHelpers
         private static readonly BigInteger M383_B = BigInteger.Parse("729666781414712578005167409261918774168143319823434197554598026004550403175874270581745671386758349462616491048773");
 
         #endregion
+
+        #region CONSTANTS FOR CURVE E-521 Edwards (AKA Curve383187)
+
+        private static readonly BigInteger E521_P = BigInteger.Parse("17161994150326524287454751997703483043173588250358263523486158647963857958494136754758766516636578496366936590652341426043192829487025423179934212936701086591");
+        private static readonly BigInteger E521_N = BigInteger.Parse("1716199415032652428745475199770348304317358825035826352348615864796385795849413675475876651663657849636693659065234142604319282948702542317993421293670108523");
+        private static readonly EcModPoint E521_G = new EcModPoint
+        {
+            x = BigInteger.Parse("12548554862604340339214227267138030612212946247573784081688804172704756356748401067995657237970831588741416001767303408289646369947502459959521790104254553894"),
+            y = BigInteger.Parse("5913688689523515869205441309572965034430425538652800303101623058374052639077588954535236458964704491401744419102950722299571100399610901049518344897138107685")
+        };
+        private static readonly BigInteger E521_A = BigInteger.Parse("11083787888752546935647860665183499465382942411689711858918144126809991598194129987448370041994456945570313214796303837652895369043703919137040845852007342090");
+        private static readonly BigInteger E521_B = BigInteger.Parse("11699553882572132876517186257693693880126439212339140295524707689410546686982692764528835044327482331435330615618320717522500667323909692422432065495019324207");
+
+        #endregion
+
 
         #region ELLIPTIC CURVE KEY PAIR GENERATOR
 
@@ -192,6 +208,20 @@ namespace EllipticCurves.ExtensionsAndHelpers
             return ECKeyPairGenerator(M383_P, M383_A, M383_B, M383_G, M383_N, Sk);
         }
 
+
+        /// <summary>
+        /// Return point Q coords representing public key pair (see specs for M-383 parameters)
+        /// </summary>
+        /// <returns></returns>
+        public static EcModPoint E521KeyPairGenerator(BigInteger Sk)
+        {
+            // Elliptic curve equation:
+            // y^2 = x^3 + 6567...6908*x + 7296...48773 (short Weierstrass form, used in this context)
+            // y^2 = x^3 + 2065150*x^2 + x (Montgomery form)
+
+            return ECKeyPairGenerator(E521_P, E521_A, E521_B, E521_G, E521_N, Sk);
+        }
+
         /// <summary>
         /// Returns the final point via summation. This method is very slow. Do not use big value for Sk.
         /// </summary>
@@ -290,6 +320,12 @@ namespace EllipticCurves.ExtensionsAndHelpers
                     a = M383_A;
                     b = M383_B;
                     break;
+                case EllipticCurveType.E521:
+                    p = E521_P;
+                    n = E521_N;
+                    a = E521_A;
+                    b = E521_B;
+                    break;
                 default:
                     break;
             }
@@ -341,6 +377,9 @@ namespace EllipticCurves.ExtensionsAndHelpers
                     break;
                 case EllipticCurveType.M383:
                     kG = M383KeyPairGenerator(k);
+                    break;
+                case EllipticCurveType.E521:
+                    kG = E521KeyPairGenerator(k);
                     break;
                 default:
                     break;
@@ -403,6 +442,12 @@ namespace EllipticCurves.ExtensionsAndHelpers
                     n = M383_N;
                     a = M383_A;
                     b = M383_B;
+                    break;
+                case EllipticCurveType.E521:
+                    p = E521_P;
+                    n = E521_N;
+                    a = E521_A;
+                    b = E521_B;
                     break;
                 default:
                     break;
