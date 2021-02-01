@@ -48,9 +48,9 @@ namespace ConsoleEllipticCurvesSample
             var b = (tmpB % p + p) % p;
 
             // (u,v) ==> (x,y) = [(1-v)*(1-d)/4/(1+v) - (1+d)/6, (1-v)/u/(1+v) * (1-d)/6] 
-            var tmpx1 = ((1 - gv) * (1 - d) * inv4 * invOp) % p;
+            var tmpX1 = ((1 - gv) * (1 - d) * inv4 * invOp) % p;
             var tmpX2 = ((1 + d) * inv6) % p;
-            var tmpX = (tmpx1 - tmpX2) % p;
+            var tmpX = (tmpX1 - tmpX2) % p;
             var x = (tmpX % p + p) % p;
 
             var y2 = (x.BigPow(3) + BigInteger.Multiply(a, x) + b) % p;
@@ -59,7 +59,7 @@ namespace ConsoleEllipticCurvesSample
 
         static void Main(string[] args)
         {
-            //getWeirstrasseFormFromEdwards();
+            getWeirstrasseFormFromEdwards();
 
             // Elliptic curve chosen
             var ecType = EllipticCurveType.E521;
