@@ -3,13 +3,64 @@ using System;
 using System.Numerics;
 using System.Security.Cryptography;
 using System.Text;
+using static System.Console;
 
 namespace ConsoleEllipticCurvesSample
 {
     class Program
     {
+        private static void getWeirstrasseFormFromEdwards()
+        {
+            Write("d = ");
+            var strD = ReadLine();
+            var d = BigInteger.Parse(strD);
+
+            WriteLine();
+            Write("p = ");
+            string strP = ReadLine();
+            var p = BigInteger.Parse(strP);
+
+            WriteLine();
+            Write("Gx_edw = ");
+            string strGx = ReadLine();
+            var gx = BigInteger.Parse(strGx);
+
+            WriteLine();
+            Write("Gy_edw = ");
+            string strGy = ReadLine();
+            var gv = BigInteger.Parse(strGy);
+
+
+            // InvMod constants
+            var inv16 = BigInteger.Parse("16").ModInv(p);
+            var inv12 = BigInteger.Parse("12").ModInv(p);
+            var inv108 = BigInteger.Parse("108").ModInv(p);
+            var inv96 = BigInteger.Parse("96").ModInv(p);
+            var inv4 = BigInteger.Parse("4").ModInv(p);
+            var inv6 = BigInteger.Parse("6").ModInv(p);
+
+            var invOp = (1 + gv).ModInv(p);
+
+            var tmpA = ((1 - d).BigPow(2) * inv16 - (1 + d).BigPow(2) * inv12) % p;
+            var a = (tmpA % p + p) % p;
+
+            var tmpB = ((1 + d).BigPow(3) * inv108 - (1 - d).BigPow(2) * (1 + d) * inv96) % p;
+            var b = (tmpB % p + p) % p;
+
+            // (u,v) ==> (x,y) = [(1-v)*(1-d)/4/(1+v) - (1+d)/6, (1-v)/u/(1+v) * (1-d)/6] 
+            var tmpx1 = ((1 - gv) * (1 - d) * inv4 * invOp) % p;
+            var tmpX2 = ((1 + d) * inv6) % p;
+            var tmpX = (tmpx1 - tmpX2) % p;
+            var x = (tmpX % p + p) % p;
+
+            var y2 = (x.BigPow(3) + BigInteger.Multiply(a, x) + b) % p;
+            var y = y2.ModSqrt(p);
+        }
+
         static void Main(string[] args)
         {
+            //getWeirstrasseFormFromEdwards();
+
             // Elliptic curve chosen
             var ecType = EllipticCurveType.E521;
 
